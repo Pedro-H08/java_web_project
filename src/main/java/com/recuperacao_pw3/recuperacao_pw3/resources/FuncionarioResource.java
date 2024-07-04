@@ -1,21 +1,52 @@
 package com.recuperacao_pw3.recuperacao_pw3.resources;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.recuperacao_pw3.recuperacao_pw3.entities.Funcionario_user;
+import com.recuperacao_pw3.recuperacao_pw3.entities.Produto;
+import com.recuperacao_pw3.recuperacao_pw3.services.FuncionarioServices;
+import com.recuperacao_pw3.recuperacao_pw3.services.ProdutosServices;
 
-@RestController
-@RequestMapping(value = "/users")
+@Controller
 public class FuncionarioResource {
 	
-	@GetMapping
-	public ResponseEntity<Funcionario_user> findAll(){
-		Funcionario_user pedro = new Funcionario_user(1L, "pedro", "pedro@gmail.com", "1234");
-		return ResponseEntity.ok().body(pedro);
-	}
+    @Autowired
+    private FuncionarioServices funcionarioService;
 	
+    @GetMapping("/conclusao")
+    public String findAll(Model model) {
+        return "conclusao";
+    }
+	
+    @GetMapping("/cadastro")
+    public String cadastroFuncPage(Model model) {
+        model.addAttribute("funcionario", new Funcionario_user());
+        return "cadastroFunc";
+    }
 
+    @PostMapping("/save")
+    public String salvarFuncionario(@ModelAttribute("funcionario") Funcionario_user funcionario) {
+        funcionarioService.save(funcionario);
+        return "redirect:cadastroProduto";
+    }
+    
+    @Autowired
+    private ProdutosServices produtoService;
+	
+    @GetMapping("/cadastroProduto")
+    public String cadastroProduto(Model model) {
+        model.addAttribute("produto", new Produto());
+        return "cadastroProduto";
+    }
+    
+    @PostMapping("/saves")
+    public String salvarProduto(@ModelAttribute("produto") Produto produto) {
+        produtoService.saves(produto);
+        return "redirect:conclusao";
+    }
 }

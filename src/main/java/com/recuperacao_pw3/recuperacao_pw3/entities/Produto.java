@@ -10,28 +10,30 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_funcionarios")
-public class Funcionario_user implements Serializable {
+@Table(name = "tb_produto")
+public class Produto implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
-	private String email;
-	private String password;
+	private String valor;
+	private String nome;
+	private String marca;
 	
-	public Funcionario_user() {
+	public Produto() {
 		
 	}
+	
 
-	public Funcionario_user(Long id, String name, String email, String password) {
+	public Produto(Long id, String valor, String nome, String marca) {
 		super();
 		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.password = password;
+		this.valor = valor;
+		this.nome = nome;
+		this.marca = marca;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -41,34 +43,36 @@ public class Funcionario_user implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getValor() {
+		return valor;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setValor(String valor) {
+		this.valor = valor;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getMarca() {
+		return marca;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setMarca(String marca) {
+		this.marca = marca;
 	}
+
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -78,9 +82,11 @@ public class Funcionario_user implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Funcionario_user other = (Funcionario_user) obj;
+		Produto other = (Produto) obj;
 		return Objects.equals(id, other.id);
 	}
 	
 	
+	
+
 }
