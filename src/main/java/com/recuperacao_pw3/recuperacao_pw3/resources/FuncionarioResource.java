@@ -23,8 +23,13 @@ public class FuncionarioResource {
         return "conclusao";
     }
 	
-    @GetMapping("/cadastro")
+    @GetMapping("/")
     public String cadastroFuncPage(Model model) {
+        model.addAttribute("funcionario", new Funcionario_user());
+        return "cadastroFunc";
+    }
+    @GetMapping("/cadastro")
+    public String cadastroFuncpagina(Model model) {
         model.addAttribute("funcionario", new Funcionario_user());
         return "cadastroFunc";
     }
